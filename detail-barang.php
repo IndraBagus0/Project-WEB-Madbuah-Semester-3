@@ -1,6 +1,13 @@
 <?php
-include 'assets/layout/header.php';
+          include 'assets/layout/header.php';
+
+          // mengambil id barang dari url
+          $id_barang = (int)$_GET['id_barang'];
+
+          // menampilkan data barang
+          $produkbuah = select("SELECT * FROM `produk` WHERE id_barang = $id_barang ") [0];
 ?>
+
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
@@ -15,18 +22,19 @@ include 'assets/layout/header.php';
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" href="produk-buah.php">
-                    <i class="bi bi-menu-button-wide"></i><span>Product</span><i></i>
+                <a class="nav-link " href="produk-buah.php">
+                    <i class="bi bi-menu-button-wide"></i>
+                    <span>Produk</span>
                 </a>
-      </li><!-- End Components Nav -->
+      </li>
 
       <li class="nav-item">
-        <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-people"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="data-costumers.php" class="active">
+            <a href="data-costumers.php">
               <i class="bi bi-circle"></i><span>Data Costumers</span>
             </a>
           </li>
@@ -58,7 +66,7 @@ include 'assets/layout/header.php';
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-bar-chart"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-bar-chart"></i><span>Laporan</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
@@ -101,7 +109,6 @@ include 'assets/layout/header.php';
           <span>Contact</span>
         </a>
       </li><!-- End Contact Page Nav -->
-
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -109,69 +116,71 @@ include 'assets/layout/header.php';
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Data Costumers</h1>
+      <h1>Produk</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Users</li>
-          <li class="breadcrumb-item active">Costumers</li>
+          <li class="breadcrumb-item"><a href="adminpage.php">Home</a></li>
+          <li class="breadcrumb-item">Produk</li>
+          <li class="breadcrumb-item active">Detail Produk</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
-
+    
     <section class="section">
-      <div class="row">
-        <div class="col-lg-11">
+    <div class="row">
+      <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Data Kostumer</h5>
+              <h5 class="card-title">Detail Produk <?= $produkbuah['nama_barang']; ?></h5>
+              
 
               <!-- Table with hoverable rows -->
-              <table class="table table-hover">
+              <table class="table table-bordered">
                 <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Join Date</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Action</th>
-                  </tr>
+                <tr>
+                    <th scope="col" class="col-lg-2">ID Produk</th>
+                    <td><?= $produkbuah['id_barang']; ?></td>
+                </tr>
+                <tr>
+                    <th scope="col">Nama</th>
+                    <td><?= $produkbuah['nama_barang']; ?></td>
+                </tr>
+                <tr>
+                    <th scope="col">Harga</th>
+                    <td>RP  <?= $produkbuah['harga']; ?></td>
+                </tr>
+                <tr>
+                    <th scope="col">Stok</th>
+                    <td><?= $produkbuah['qty']; ?></td>
+                </tr>
+                <tr>
+                    <th scope="col">Kategori</th>
+                    <td><?= $produkbuah['kategori']; ?></td>
+                </tr>
+                    <th scope="col">Deskripsi</th> 
+                    <td><?= $produkbuah['deskripsi']; ?></td>
+                </tr>
+                </tr>
+                    <th scope="col">Gambar</th> 
+                    <td><img src="assets/img/<?= $produkbuah['foto_produk']; ?>" width="100"></td>
+                </tr>
+                
+                
                 </thead>
-                <tbody>
-                <?php foreach($pelanggan as $data_pelanggan) : ?>
-                  <tr>
-                    <td><?= $data_pelanggan['id_pelanggan']; ?></td>
-                    <td><?= $data_pelanggan['nama']; ?></td>
-                    <td><?= $data_pelanggan['username']; ?></td>
-                    <td><?= $data_pelanggan['email']; ?></td>
-                    <td><?= $data_pelanggan['no_telp']; ?></td>
-                    <td><?= $data_pelanggan['alamat']; ?></td>
-                    <td><?= $data_pelanggan['tanggal_gabung']; ?></td>
-                    <td><img src="assets/img/<?= $data_pelanggan['foto']; ?>" width="70"></td>
-                    <th>
-                    <a href="hapus-pelanggan.php?id_pelanggan=<?= $data_pelanggan['id_pelanggan'] ?>" onclick="return confirm('are you sure want to delete this data?')">Delete</a>
-                    </th>
-                  </tr>
-                  <?php endforeach; ?>
-                </tbody>
               </table>
-
+              <a href="produk-buah.php" class="btn btn-secondary btn-sn">Kembali</a>
             </div>
+        
           </div>
-
         </div>
-      </div>
+
+
+
     </section>
 
   </main><!-- End #main -->
 
-  <?php
-include 'assets/layout/footer.php';
-?>
+  <?php include 'assets/layout/footer.php'; ?>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
