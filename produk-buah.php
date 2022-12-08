@@ -1,25 +1,34 @@
 <?php
     include 'assets/layout/header.php';
-          if (isset($_POST['addproduk'])) {
-              if (tambah_produk($_POST) >0) {
-                      echo "<script>
-                          alert('Menambah Produk Berhasil');
-                          document.location.href = 'produk-buah.php';
-                          </script>";
-                    }else{
-                    echo "<script>
-                    alert('Gagal Menambahkan Produk');
-                    document.location.href = 'produk-buah.php';
-                    </script>";
-                  }
-                  }
-          
-          
+    if (isset($_POST['addproduk'])) {
+      if (tambah_produk($_POST) >0) {
+              echo "<script>
+                  alert('Menambah Produk Berhasil');
+                  document.location.href = 'produk-buah.php';
+                  </script>";
+            }else{
+            echo "<script>
+            alert('Gagal Menambahkan Produk');
+            document.location.href = 'produk-buah.php';
+            </script>";
+          }
+          }
 
-          // check apakah tombol ubah ditekan
-                  if (isset($_POST['ubahproduk'])) {
-                  if (edit_produk($_POST) > 0);
-    }
+
+              // check apakah tombol ubah ditekan
+              if (isset($_POST['ubahproduk'])) {
+                if (edit_produk($_POST) > 0){
+                  echo "<script>
+                          alert('Data produk Berhasil Diubah');
+                          document.location.href = 'produk-buah.php';
+                        </script>";
+              }else {
+                echo "<script>
+                    alert('Data produk Gagal Diubah');
+                    document.location.href = 'produk-buah.php';
+                </script>";
+              }
+            }
                   ?>
 
   <!-- ======= Sidebar ======= -->
@@ -185,16 +194,27 @@
                         <label for="deskripsi" class="form-label">Deskripsi</label>
                         <input type="text" class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi Produk" required value="<?= $produk['deskripsi']; ?>">
                       </div>
-                      <div class="mb-3">
+                      <!-- <div class="mb-3">
                         <label for="formFile" class="form-label" >Pilih Gambar</label>
                         <input class="form-control" type="file" id="foto" name="foto" value= <img src="assets/img/<?= $produk['foto_produk']; ?>" >
+                      </div> -->
+                      <div class="form-group">
+                            <label for="file">Foto</label><br>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="foto" name="foto" onchange="previewImg()">
+                                <label class="custom-file-label" for="file">Pilih ulang gambar...</label>
+                            </div>
+                            <div class="mt-1">
+                                <img src="assets/img/<?= $produk['foto_produk']; ?>" alt="" class="img-thumbnail img-preview" width="100px">
+                            </div>
+                        </div>
+                      <div class="modal-footer">
+                        <button type="submit" name="ubahproduk" class="btn btn-primary" style="float: right;">Tambah Data</button>
+                        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</a>
                       </div>
                     </form>
                     </div>
-                    <div class="modal-footer">
-                      <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</a>
-                      <a type="submit" name="ubahproduk" class="btn btn-primary">Ubah</a>
-                    </div>
+                    
                   </div>
                 </div>
               </div><!-- End Ubah Produk Modal-->
@@ -245,10 +265,24 @@
           </div>
         </div>
         </div>
-
-
-
     </section>
+
+    <script>
+    function previewImg() {
+        const gambar = document.querySelector('#foto');
+        const gambarLabel = document.querySelector('.custom-file-label');
+        const imgPreview = document.querySelector('.img-preview');
+
+        gambarLabel.textContent = gambar.files[0].name;
+
+        const fileGambar = new FileReader();
+        fileGambar.readAsDataURL(gambar.files[0]);
+
+        fileGambar.onload = function(e) {
+            imgPreview.src = e.target.result;
+        }
+    }
+</script>
 
   </main><!-- End #main -->
 

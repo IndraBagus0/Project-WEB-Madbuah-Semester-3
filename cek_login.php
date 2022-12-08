@@ -21,12 +21,12 @@ if ($cek > 0) {
 		// alihkan ke halaman dashboard admin
 		header("location:adminpage.php");
 		// cek jika user login sebagai user
-	} else if ($data['level'] == "user") {
-		// buat session login dan username
+	} else if ($data['level'] == "admin") {
+		// buat session login dadminname
 		$_SESSION['username'] = $username;
-		$_SESSION['level'] = "users";
+		$_SESSION['level'] = "admin";
 		// alihkan ke halaman dashboard user
-		header("location:halaman_user.php");
+		header("location:adminpage.php");
 	} else {
 		// alihkan ke halaman login kembali
 		header("location:login.php?pesan=gagal");

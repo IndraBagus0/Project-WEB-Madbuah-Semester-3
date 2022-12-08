@@ -128,7 +128,7 @@
       <h1>Data Admin</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="adminpage.php">Home</a></li>
           <li class="breadcrumb-item">Users</li>
           <li class="breadcrumb-item active">Admin</li>
         </ol>
@@ -136,11 +136,14 @@
     </div><!-- End Page Title -->
     <section class="section">
       <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg-11">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Data Admin</h5>
-
+              <h5 class="card-title">Data Admin <span> <?php if ($_SESSION['level'] == "super_admin"): ?>
+                <a href="#" type="submit" name="add" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modaltambahadmin" style="float: right;">Tambah Admin</a>
+              <?php endif; ?></span></h5> 
+                <!-- Untuk Membatasi hak Akses -->
+             
               <!-- Table with hoverable rows -->
               <table class="table table-hover">
                 <thead>
@@ -153,7 +156,7 @@
                     <th scope="col">Role</th>
                     <th scope="col">Address</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -168,7 +171,7 @@
                     <td><?= $data_admin['alamat']; ?></td>
                     <td><img src="assets/img/<?= $data_admin['foto']; ?>" width="70"></td>
                     <th>
-                      <a href="hapus-admin.php?id_admin=<?= $data_admin['id_admin'] ?>" onclick="return confirm('are you sure want to delete this data?')">Delete</a>
+                      <a href="hapus-admin.php?id_admin=<?= $data_admin['id_admin'] ?>" onclick="return confirm('are you sure want to delete this data?')">Hapus</a>
                     </th>
                   </tr>
                   <?php endforeach; ?>
@@ -178,11 +181,72 @@
           </div>
         </div>
 
+
+        <!--  -->
+        <div class="modal fade" id="modaltambahadmin" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Tambah Admin</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    <form action=""method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label for="nama" class="form-label">Name</label>
+                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Name" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="username" class="form-label">Username</label>
+                      <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="visually-hidden">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="alamat" class="form-label">Address</label>
+                      <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Address" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="no_telp" class="form-label">Contact</label>
+                      <input type="number" class="form-control" id="no_telp" name="no_telp" placeholder="Phone Number" required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="level" class="form-label" >Role</label>
+                    <select class="form-select" aria-label="Default select example" id="level" name="level" required>
+                    <option selected>Set As Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="super_admin">Super Admin</option>
+                    </select>
+                    </div>
+                    <div class="mb-3">
+                      <label for="formFile" class="form-label" >Select Photo</label>
+                      <input class="form-control" type="file" id="foto" name="foto" >
+                    </div>
+                    <!-- <button type="submit" name="add" class="btn btn-primary" style="float: right;">Add</button> -->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" name="add" class="btn btn-primary" style="float: right;">Tambah Data</button>
+                      <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</a>
+                      <!-- <a type="submit" name="ubahproduk" class="btn btn-primary">Ubah</a> -->
+                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div><!-- End Ubah Produk Modal-->
+
+        <!-- Untuk Membatasi hak Akses -->
+        <!-- <?php if ($_SESSION['level'] == "super_admin"): ?>
         <div class="col-lg-3">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Add Admin</h5>
-           
             <form action=""method="post" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="nama" class="form-label">Name</label>
@@ -226,6 +290,7 @@
             </div>
           </div>
         </div>
+        <?php endif; ?> -->
 
     </section>
 
