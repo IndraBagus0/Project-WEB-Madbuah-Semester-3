@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Toko Buah Kita</title>
+</head>
+
+<body>
+    <header>
+        <h1>Toko Buah Kita</h1>
+        <nav>
+            <ul>
+                <li><a href="#produk">Produk</a></li>
+                <li><a href="#tentang-kami">Tentang Kami</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="produk">
+            <h2>Produk Kami</h2>
+            <ul>
+                <li>Apel</li>
+                <li>Jeruk</li>
+                <li>Mangga</li>
+                <li>Pisang</li>
+            </ul>
+        </section>
+        <section id="tentang-kami">
+            <h2>Tentang Kami</h2>
+            <p>Toko Buah Kita adalah toko online yang menjual berbagai jenis buah segar dengan kualitas terbaik. Kami
+                menjamin kefreshan buah yang kami jual dan memberikan pelayanan terbaik kepada pelanggan kami.</p>
+        </section>
+        <section id="kontak">
+            <h2>Kontak Kami</h2>
+            <p>Telepon: 0800-123-456</p>
+            <p>Email: info@tokobuahkita.com</p>
+        </section>
+    </main>
+    <footer>
+        <p>Copyright 2021 Toko Buah Kita</p>
+    </footer>
+</body>
+
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: lightblue;
+        padding: 20px;
+    }
+
+    header h1 {
+        margin: 0;
+        text-align: center;
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+    }
+
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 0 20px;
+    }
+
+    section {
+        background-color: lightgrey;
+        padding: 20px;
+        width: 30%;
+    }
+
+    section h2 {
+        text-align: center;
+    }
+
+    footer {
+        background-color: lightblue;
+        padding: 20px;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        main {
+            flex-direction: column;
+        }
+
+        section {
+            width: 100%;
+        }
+    }
+</style>
