@@ -73,7 +73,15 @@ function upload_file()
     move_uploaded_file($tmpName, 'assets/img/' . $namaFileBaru);
     return $namaFileBaru;
 }
+// Hapus barang
+function hapus_barang($id_barang)
+{
+    global $koneksi;
+    $query = "DELETE FROM produk  WHERE id_produk = $id_barang";
 
+    mysqli_query($koneksi, $query);
+    return mysqli_affected_rows($koneksi);
+}
 
 // Hapus Admin
 
@@ -87,15 +95,6 @@ function hapus_admin($id_user)
 }
 // Hapus Costumers
 
-function hapus_pelanggan($id_user)
-{
-    global $koneksi;
-    $query = "DELETE FROM data_user  WHERE id_user = $id_user";
-
-    mysqli_query($koneksi, $query);
-    return mysqli_affected_rows($koneksi);
-}
-
 //hapus transaksi
 function hapus_transaksi($id_transaksi)
 {
@@ -107,15 +106,7 @@ function hapus_transaksi($id_transaksi)
 }
 
 
-// Hapus barang
-function hapus_barang($id_barang)
-{
-    global $koneksi;
-    $query = "DELETE FROM produk  WHERE id_produk = $id_barang";
 
-    mysqli_query($koneksi, $query);
-    return mysqli_affected_rows($koneksi);
-}
 
 //menampilkan produk
 
@@ -169,7 +160,7 @@ function tambah_admin($post)
     $level = $post['status'];
 
 
-    $query = "INSERT INTO `data_user` VALUES (NULL, '$nama','$username','$email', '$password','$no_telp','$alamat' ,'$level') ";
+    $query = "INSERT INTO data_user(username, password, fullname , email, no_telp, alamat, status ) VALUES ('$username','$password','$nama','$email', '$no_telp','$alamat' ,'$level') ";
 
     mysqli_query($koneksi, $query);
 
@@ -180,24 +171,17 @@ function tambah_admin($post)
 function edit_produk($post)
 {
     global $koneksi;
-    $id_barang = strip_tags($post['id_barang']);
-    $nama_barang = strip_tags($post['nama_barang']);
-    $qty = strip_tags($post['qty']);
-    $kategori = strip_tags($post['kategori']);
-    $harga = strip_tags($post['harga']);
-    $deskripsi = strip_tags($post['deskripsi']);
-    $fotoLama = strip_tags($post['fotoLama']);
 
-    // check upload foto baru atau tidak
-    if ($_FILES['foto']['error'] == 4) {
-        $foto_produk = $fotoLama;
-    } else {
-        $foto_produk = upload_file();
-    }
-
-    // query ubah data
-    $query = "UPDATE `produk` SET nama_barang= '$nama_barang', qty= '$qty',harga= '$harga',kategori= '$kategori', deskripsi= '$deskripsi', foto_produk='$foto_produk' WHERE id_barang='$id_barang' ";
+    $id_produk = $post['id_produk'];
+    $nama_produk = $post['nama_produk'];
+    $qty = $post['qty'];
+    $harga = $post['harga'];
+    $kategori = $post['kategori'];
+    $keterangan = $post['keterangan'];
+    $query = "UPDATE produk  SET  `nama_produk` = '$nama_produk', `qty` = '$qty', `harga` = '$harga', `kategori` = '$kategori', `keterangan` = '$keterangan' = WHERE id_produk='$id_produk' ";
     mysqli_query($koneksi, $query);
+
+    return mysqli_affected_rows($koneksi);
 }
 
 function pesanan($query)
@@ -212,4 +196,21 @@ function pesanan($query)
     return $rows;
 }
 $no = 1;
-$pesanan = select("SELECT * FROM transaksi INNER JOIN data_user ON transaksi.id_user = data_user.id_user INNER JOIN detail_transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi INNER JOIN produk ON detail_transaksi.id_produk =produk.id_produk");
+$pesanan = select("SELECT transaksi.id_transaksi, data_user.fullname, transaksi.tanggal_beli, 
+detail_transaksi.qty, detail_transaksi.total, transaksi.status FROM transaksi 
+INNER JOIN data_user ON transaksi.id_user = data_user.id_user 
+INNER JOIN detail_transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi 
+INNER JOIN produk ON detail_transaksi.id_produk =produk.id_produk");
+
+// Update Pesanan
+function Proses($post)
+{
+    global $koneksi;
+
+    $id_transaksi = $post['id_transaksi'];
+    $status = $post['status'];
+    $query = "UPDATE `transaksi` SET `status`='$status' WHERE id_transaksi='$id_transaksi' ";
+    mysqli_query($koneksi, $query);
+
+    return mysqli_affected_rows($koneksi);
+}

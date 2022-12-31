@@ -24,7 +24,7 @@ if (isset($_POST['add'])) {
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="index.php">
+      <a class="nav-link collapsed" href="dashboard.php">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -68,6 +68,12 @@ if (isset($_POST['add'])) {
         <span>Laporan</span>
       </a>
     </li><!-- End Charts Nav -->
+    <li>
+      <a class="nav-link collapsed" href="logout.php">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Keluar</span>
+      </a>
+    </li>
   </ul>
 
 </aside><!-- End Sidebar-->
@@ -78,7 +84,7 @@ if (isset($_POST['add'])) {
     <h1>Data Admin</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
         <li class="breadcrumb-item">Pengguna</li>
         <li class="breadcrumb-item active">Admin</li>
       </ol>
@@ -118,13 +124,13 @@ if (isset($_POST['add'])) {
                     <td><?= $data_admin['alamat']; ?></td>
                     <th>
                       <?php if ($_SESSION['status'] == "super_admin") : ?>
-                        <a href="hapus-admin.php?id_user=<?= $data_admin['id_user'] ?>" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal">
+                        <a href="hapus-admin.php?id_user=<?= $data_admin['id_user'] ?>" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal<?= $data_admin['id_user'] ?>">
                           hapus </a>
                       <?php endif; ?>
                     </th>
                   </tr>
                   <!-- modal hapus -->
-                  <div class="modal fade" id="delete_modal" tabindex="-1">
+                  <div class="modal fade" id="delete_modal<?= $data_admin['id_user'] ?>" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -136,7 +142,7 @@ if (isset($_POST['add'])) {
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                          <a href="hapus-admin.php?id_user=<?= $data_admin['id_usercj'] ?>" class="btn btn-danger">Hapus </a>
+                          <a href="hapus-admin.php?id_user=<?= $data_admin['id_user'] ?>" class="btn btn-danger">Hapus </a>
                         </div>
                       </div>
                     </div>
@@ -160,22 +166,24 @@ if (isset($_POST['add'])) {
             <div class="modal-body">
               <form action="" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                  <label for="fullname" class="form-label">Nama</label>
-                  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Name" required>
-                </div>
-                <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
                   <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
                   <label for="password" class="visually-hidden">Password</label>
                   <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                 </div>
+                <div class="mb-3">
+                  <label for="fullname" class="form-label">Nama</label>
+                  <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Name" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                </div>
+
                 <div class="mb-3">
                   <label for="alamat" class="form-label">Alamat</label>
                   <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Address" required>

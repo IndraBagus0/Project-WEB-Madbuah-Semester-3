@@ -5,7 +5,7 @@ include 'assets/layout/header.php';
 $id_transaksi = (int)$_GET['id_transaksi'];
 
 // menampilkan data transaksi
-$pesanan = select("SELECT * FROM detail_transaksi INNER JOIN produk ON detail_transaksi.id_produk = produk.id_produk  WHERE id_transaksi = $id_transaksi ")[0];
+$pesanan = select("SELECT  detail_transaksi.id_transaksi, detail_transaksi.qty,detail_transaksi.total, produk.nama_produk FROM detail_transaksi INNER JOIN produk ON detail_transaksi.id_produk = produk.id_produk  WHERE id_transaksi = $id_transaksi ")[0];
 
 ?>
 <!-- ======= Sidebar ======= -->
@@ -14,7 +14,7 @@ $pesanan = select("SELECT * FROM detail_transaksi INNER JOIN produk ON detail_tr
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="index.php">
+      <a class="nav-link collapsed" href="dashboard.php">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -58,6 +58,12 @@ $pesanan = select("SELECT * FROM detail_transaksi INNER JOIN produk ON detail_tr
         <span>Laporan</span>
       </a>
     </li><!-- End Charts Nav -->
+    <li>
+      <a class="nav-link collapsed" href="logout.php">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Keluar</span>
+      </a>
+    </li>
   </ul>
 
 </aside><!-- End Sidebar-->
@@ -96,23 +102,13 @@ $pesanan = select("SELECT * FROM detail_transaksi INNER JOIN produk ON detail_tr
                           <tbody>
                             <tr>
                               <td><?= $pesanan['nama_produk']; ?></td>
-                              <td><?= $pesanan['qty_transaksi']; ?> Produk</td>
-                              <td><?= $pesanan['total']; ?></td>
+                              <td><?= $pesanan['qty']; ?> Produk</td>
+                              <td>Rp <?= $pesanan['total']; ?></td>
                             </tr>
                             <tr>
                               <td class="thick-line"></td>
-                              <td class="thick-line text-center"><strong>Subtotal</strong></td>
-                              <td class="thick-line text-right">$670.99</td>
-                            </tr>
-                            <tr>
-                              <td class="no-line"></td>
-                              <td class="no-line text-center"><strong>Shipping</strong></td>
-                              <td class="no-line text-right">$15</td>
-                            </tr>
-                            <tr>
-                              <td class="no-line"></td>
-                              <td class="no-line text-center"><strong>Total</strong></td>
-                              <td class="no-line text-right">$685.99</td>
+                              <td class="thick-line text-center"><strong>Total</strong></td>
+                              <td class="thick-line text-right">Rp <?= $pesanan['total']; ?></td>
                             </tr>
                           </tbody>
                         </table>

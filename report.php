@@ -7,7 +7,7 @@ include 'assets/layout/header.php';
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="index.php">
+            <a class="nav-link collapsed" href="dashboard.php">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -52,6 +52,12 @@ include 'assets/layout/header.php';
                 <span>Laporan</span>
             </a>
         </li><!-- End Charts Nav -->
+        <li>
+            <a class="nav-link collapsed" href="logout.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Keluar</span>
+            </a>
+        </li>
 
     </ul>
 
@@ -66,6 +72,46 @@ include 'assets/layout/header.php';
             </ol>
         </nav>
     </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                    <div class="card-body">
+                        <h5 class="card-title">Pesanan</h5>
+                        <table class="table table-borderless datatable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">NO</th>
+                                    <th scope="col">ID Transaksi</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Tanggal Pesanan</th>
+                                    <th>Kuantitas</th>
+                                    <th scope="col">Jumlah</th>
+                                    <th scope="col">Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($pesanan as $pesanan) : ?>
+                                    <tr>
+                                        <td><?= $no++; ?></td>
+                                        <td><?= $pesanan['id_transaksi']; ?></td>
+                                        <td><?= $pesanan['fullname']; ?></td>
+                                        <td><?= $pesanan['tanggal_beli']; ?></td>
+                                        <td><?= $pesanan['qty']; ?> Produk</td>
+                                        <td><?= $pesanan['total']; ?></td>
+                                        <td><?= $pesanan['status']; ?></td>
+                                    </tr>
+                            </tbody>
+                        <?php endforeach; ?>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div><!-- End Recent Sales -->
+        </div>
+        <section class="section">
 </main><!-- End #main -->
 <!-- Css invoive -->
 

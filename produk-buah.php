@@ -13,29 +13,7 @@ if (isset($_POST['upload'])) {
             </script>";
   }
 }
-if (isset($_POST['h'])) {
-  // ambil data dari form
-  $id_kategori = $_POST['id_kategori'];
-  $nama_produk = $_POST['nama_produk'];
-  $qty = $_POST['qty'];
-  $harga = $_POST['harga'];
-  $kategori = $_POST['kategori'];
-  $keterangan = $_POST['keterangan'];
 
-  // ambil file yang diunggah
-  $file = $_FILES['foto_produk'];
-  $fileName = $file['name'];
-  $fileTmpName = $file['tmp_name'];
-  $fileSize = $file['size'];
-  $fileType = $file['type'];
-
-  // baca file menjadi string
-  $content = addslashes(file_get_contents($fileTmpName));
-
-  // jalankan perintah INSERT
-  $sql = "INSERT INTO 'produk' VALUES (NULL '$id_kategori', '$nama_produk', $qty, $harga, '$kategori', '$content', '$keterangan')";
-  $result = mysqli_query($koneksi, $sql);
-}
 // check apakah tombol ubah ditekan
 if (isset($_POST['ubahproduk'])) {
   if (edit_produk($_POST) > 0) {
@@ -58,7 +36,7 @@ if (isset($_POST['ubahproduk'])) {
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="index.php">
+      <a class="nav-link collapsed" href="dashboard.php">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -104,6 +82,12 @@ if (isset($_POST['ubahproduk'])) {
         <span>Laporan</span>
       </a>
     </li><!-- End Charts Nav -->
+    <li>
+      <a class="nav-link collapsed" href="logout.php">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Keluar</span>
+      </a>
+    </li>
   </ul>
 
 </aside><!-- End Sidebar-->
@@ -115,7 +99,7 @@ if (isset($_POST['ubahproduk'])) {
     <h1>Produk</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
         <li class="breadcrumb-item active">Produk</li>
       </ol>
     </nav>
@@ -208,18 +192,8 @@ if (isset($_POST['ubahproduk'])) {
                               <label for="deskripsi" class="form-label">Deskripsi</label>
                               <input type="text" class="form-control" id="deskripsi" name="keterangan" placeholder="Deskripsi Produk" required value="<?= $produk['keterangan']; ?>">
                             </div>
-                            <div class="form-group">
-                              <label for="file">Foto</label><br>
-                              <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="foto" name="foto_produk" onchange="previewImg()">
-                                <label class="custom-file-label" for="file">Pilih ulang gambar...</label>
-                              </div>
-                              <div class="mt-1">
-                                <?= '<img src="data:image/png;base64,' . base64_encode($produk['foto_produk']) . '" style="width:90px;height:90px;">'; ?>
-                              </div>
-                            </div>
                             <div class="modal-footer">
-                              <button type="submit" name="ubahproduk" class="btn btn-primary" style="float: right;">Tambah Data</button>
+                              <button type="submit" name="ubahproduk" class="btn btn-primary" style="float: right;">Ubah Produk</button>
                               <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</a>
                             </div>
                           </form>

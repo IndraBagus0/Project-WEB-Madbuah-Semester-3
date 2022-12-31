@@ -19,14 +19,14 @@ if ($cek > 0) {
 		$_SESSION['username'] = $username;
 		$_SESSION['level'] = "super_admin";
 		// alihkan ke halaman dashboard admin
-		header("location:index.php");
+		header("location:dashboard.php");
 		// cek jika user login sebagai user
 	} else if ($data['level'] == "admin") {
 		// buat session login dadminname
 		$_SESSION['username'] = $username;
 		$_SESSION['level'] = "admin";
 		// alihkan ke halaman dashboard user
-		header("location:adminpage.php");
+		header("location:dashboard.php");
 	} else {
 		// alihkan ke halaman login kembali
 		header("location:login.php?pesan=gagal");

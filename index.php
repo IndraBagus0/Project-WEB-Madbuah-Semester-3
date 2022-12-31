@@ -1,313 +1,349 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-include 'assets/layout/header.php';
+<head>
+	<title>Madbuah</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-//Menghitung Jumlah Pengguna
-$data_pelanggan = mysqli_query($koneksi, "SELECT * FROM data_user WHERE status= 'user'");
-$jumlah_pelanggan = mysqli_num_rows($data_pelanggan);
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
-$data_penjualan = mysqli_query($koneksi, "SELECT * FROM transaksi");
-$jumlah_penjualan = mysqli_num_rows($data_penjualan);
+	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.css">
 
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
 
-?>
+	<link rel="stylesheet" href="css/aos.css">
 
-<!-- ======= Sidebar ======= -->
-<aside id="sidebar" class="sidebar">
-    <ul class="sidebar-nav " id="sidebar-nav">
+	<link rel="stylesheet" href="css/ionicons.min.css">
 
-        <li class="nav-item">
-            <a class="nav-link " href="index.php">
-                <i class="bi bi-grid"></i>
-                <span>Dashboard</span>
-            </a>
-        </li><!-- End Dashboard Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" href="produk-buah.php">
-                <i class="bi bi-menu-button-wide"></i><span>Produk</span><i></i>
-            </a>
-        </li><!-- End Components Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-people"></i><span>Pengguna</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="data-costumers.php">
-                        <i class="bi bi-circle"></i><span>Data Pelanggan</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="data-admin.php">
-                        <i class="bi bi-circle"></i><span>Data Admin</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End Forms Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pesanan.php">
-                <i class="bi bi-cart"></i>
-                <span>Pesanan</span>
-            </a>
-        </li>
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="css/jquery.timepicker.css">
 
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="report.php">
-                <i class="bi bi-bar-chart"></i>
-                <span>Laporan</span>
-            </a>
-        </li><!-- End Charts Nav -->
-        <li>
-            <a class="nav-link collapsed" href="logout.php">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Keluar</span>
-            </a>
-        </li>
-    </ul>
+	<link rel="stylesheet" href="css/flaticon.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="goto-here">
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="index.php">Madbuah</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+					<li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+					<li class="nav-item"><a href="login.php" class="nav-link">Login</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- END nav -->
+
+	<section id="home-section" class="hero">
+		<div class="home-slider owl-carousel">
+			<div class="slider-item" style="background-image: url(images/bg_1.jpg);">
+				<div class="overlay"></div>
+				<div class="container">
+					<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+						<div class="col-md-12 ftco-animate text-center">
+							<h1 class="mb-2">Kami Hanya Menyediakan Buah Segar</h1>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="slider-item" style="background-image: url(images/bg_2.jpg);">
+				<div class="overlay"></div>
+				<div class="container">
+					<div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+
+						<div class="col-sm-12 ftco-animate text-center">
+							<h1 class="mb-2">100% Segar &amp; Makanan Organik</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row no-gutters ftco-services">
+				<div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services mb-md-0 mb-4">
+						<div class="icon bg-color-1 active d-flex justify-content-center align-items-center mb-2">
+							<span class="flaticon-shipped"></span>
+						</div>
+						<div class="media-body">
+							<h3 class="heading">Pengiriman</h3>
+							<span>Pengiriman Cepat</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services mb-md-0 mb-4">
+						<div class="icon bg-color-2 d-flex justify-content-center align-items-center mb-2">
+							<span class="flaticon-diet"></span>
+						</div>
+						<div class="media-body">
+							<h3 class="heading">Buah Segar</h3>
+							<span>Hanya Buah Terpilih</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services mb-md-0 mb-4">
+						<div class="icon bg-color-3 d-flex justify-content-center align-items-center mb-2">
+							<span class="flaticon-award"></span>
+						</div>
+						<div class="media-body">
+							<h3 class="heading">Kualitas Super</h3>
+							<span>Buah dengan kualitas Super</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services mb-md-0 mb-4">
+						<div class="icon bg-color-4 d-flex justify-content-center align-items-center mb-2">
+							<span class="flaticon-customer-service"></span>
+						</div>
+						<div class="media-body">
+							<h3 class="heading">Dukungan</h3>
+							<span>24/7 Dukungan</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center mb-3 pb-3">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<span class="subheading">Produk unggulan</span>
+					<h2 class="mb-4">Produk Kita</h2>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-1.jpg" alt="Colorlib Template">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 pb-4 px-3 text-center">
+							<h3><a href="#">Bell Pepper</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-2.jpg" alt="Colorlib Template">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 pb-4 px-3 text-center">
+							<h3><a href="#">Strawberry</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-3.jpg" alt="Colorlib Template">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 pb-4 px-3 text-center">
+							<h3><a href="#">Green Beans</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-4.jpg" alt="Colorlib Template">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 pb-4 px-3 text-center">
+							<h3><a href="#">Purple Cabbage</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
 
 
-</aside><!-- End Sidebar-->
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-5.jpg" alt="Colorlib Template">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 pb-4 px-3 text-center">
+							<h3><a href="#">Tomatoe</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
+								</div>
+							</div>
 
-<main id="main" class="main">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-6.jpg" alt="Colorlib Template">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 pb-4 px-3 text-center">
+							<h3><a href="#">Brocolli</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+							</div>
 
-    <div class="pagetitle">
-        <h1>Dashboard</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-7.jpg" alt="Colorlib Template">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 pb-4 px-3 text-center">
+							<h3><a href="#">Carrots</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+							</div>
 
-    <section class="section dashboard">
-        <div class="row">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-3 ftco-animate">
+					<div class="product">
+						<a href="#" class="img-prod"><img class="img-fluid" src="images/product-8.jpg" alt="Colorlib Template">
+							<div class="overlay"></div>
+						</a>
+						<div class="text py-3 pb-4 px-3 text-center">
+							<h3><a href="#">Fruit Juice</a></h3>
+							<div class="d-flex">
+								<div class="pricing">
+									<p class="price"><span>$120.00</span></p>
+								</div>
+							</div>
 
-            <!-- Left side columns -->
-            <div class="col-lg-8">
-                <div class="row">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-                    <!-- Sales Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card sales-card">
+	<hr>
 
-                            <div class="card-body">
-                                <h5 class="card-title">Penjualan</h5>
+	<footer class="ftco-footer ftco-section">
+		<div class="container">
+			<div class="row">
+				<div class="mouse">
+					<a href="#" class="mouse-icon">
+						<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+					</a>
+				</div>
+			</div>
+			<div class="row mb-5">
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">Mempunyai Pertanyaan?</h2>
+						<div class="block-23 mb-3">
+							<ul>
+								<li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain
+										View, San Francisco, California, USA</span></li>
+								<li><a href="#"><span class="icon icon-phone"></span><span class="text">+62 1515
+											13479</span></a></li>
+								<li><a href="#"><span class="icon icon-envelope"></span><span class="text">indrabusiness00@gmail.com</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
 
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6><?php echo $jumlah_penjualan; ?> Penjualan</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div><!-- End Sales Card -->
-
-                    <!-- Revenue Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card revenue-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Pendapatan</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-currency-dollar"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>Rp 1.345.264</h6>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div><!-- End Revenue Card -->
-
-                    <!-- Customers Card -->
-                    <div class="col-xxl-4 col-xl-12">
-
-                        <div class="card info-card customers-card">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Pengguna</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-people"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6><?php echo $jumlah_pelanggan; ?> Pengguna</h6>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div><!-- End Customers Card -->
-
-
-                    <!-- Recent Sales -->
-                    <div class="col-12">
-                        <div class="card recent-sales overflow-auto">
-                            <div class="card-body">
-                                <h5 class="card-title">Penjualan Terakhir</h5>
-                                <table class="table table-borderless datatable">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">NO</th>
-                                            <th scope="col">ID Transaksi</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Tanggal Pesanan</th>
-                                            <th>Kuantitas</th>
-                                            <th scope="col">Jumlah</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($pesanan as $pesanan) : ?>
-                                            <tr>
-                                                <td><?= $no++; ?></td>
-                                                <td><?= $pesanan['id_transaksi']; ?></td>
-                                                <td><?= $pesanan['fullname']; ?></td>
-                                                <td><?= $pesanan['tanggal_beli']; ?></td>
-                                                <td><?= $pesanan['qty_transaksi']; ?> Produk</td>
-                                                <td>RP <?= $pesanan['total']; ?></td>
-                                                <td><?= $pesanan['status_transaksi']; ?></td>
-                                                <!-- <td><span class="badge rounded-pill bg-success ">Selesai</span></td> -->
-
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-
-                            </div>
-
-                        </div>
-                    </div><!-- End Recent Sales -->
-
-                </div>
-            </div><!-- End Left side columns -->
-
-            <!-- Right side columns -->
-            <div class="col-lg-4">
-
-                <!-- Recent Activity -->
-                <div class="col-12">
-                    <div class="card top-selling overflow-auto">
-                        <div class="filter">
-                        </div>
-
-                        <div class="card-body pb-0">
-                            <h5 class="card-title">Penjualan Teratas</h5>
-
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Foto</th>
-                                        <th scope="col">Produk</th>
-                                        <th scope="col">Harga</th>
-                                        <th scope="col">terjual</th>
-                                        <th scope="col">Pendapatan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="assets/img/anggur.svg" alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Anggur</a></td>
-                                        <td>$64</td>
-                                        <td class="fw-bold">124</td>
-                                        <td>$5,828</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="assets/img/mangga.svg" alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Mangga</a></td>
-                                        <td>$46</td>
-                                        <td class="fw-bold">98</td>
-                                        <td>$4,508</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                                        <td>$59</td>
-                                        <td class="fw-bold">74</td>
-                                        <td>$4,366</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                                        <td>$32</td>
-                                        <td class="fw-bold">63</td>
-                                        <td>$2,016</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
-                                        <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                                        <td>$79</td>
-                                        <td class="fw-bold">41</td>
-                                        <td>$3,239</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                    </div>
-                </div><!-- End activity item-->
-
-                <!-- Recent Cictumers-->
-                <div class="col-12">
-                    <div class="card top-selling overflow-auto">
-
-                        <div class="filter">
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            </ul>
-                        </div>
-
-                        <div class="card-body">
-                            <h5 class="card-title">Pelanggan Terbaru</h5>
-
-                            <table class="table table-borderless datatable">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Email</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($pelanggan as $data_pelanggan) : ?>
-                                        <tr>
-                                            <td><?= $data_pelanggan['id_user']; ?></td>
-                                            <td><?= $data_pelanggan['fullname']; ?></td>
-                                            <td><?= $data_pelanggan['email']; ?></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                    </div>
-                </div><!-- End Recent Sales -->
-
-            </div>
+					<p>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;
+						<script>
+							document.write(new Date().getFullYear());
+						</script> All rights reserved | This
+						is made with</i> by <a href="" target="_blank">Kelompok 3 TIF C Politeknik Negeri Jember</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 
 
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+		</svg></div>
 
-        </div><!-- End Right side columns -->
 
-        </div>
-    </section>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/aos.js"></script>
+	<script src="js/jquery.animateNumber.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/scrollax.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="js/google-map.js"></script>
+	<script src="js/main.js"></script>
 
-</main><!-- End #main -->
+</body>
 
-<?php include 'assets/layout/footer.php'; ?>
+</html>

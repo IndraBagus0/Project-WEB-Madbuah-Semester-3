@@ -17,7 +17,7 @@ include 'assets/layout/header.php';
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="index.php">
+      <a class="nav-link collapsed" href="dashboard.php">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -62,7 +62,12 @@ include 'assets/layout/header.php';
       </a>
     </li><!-- End Charts Nav -->
 
-
+    <li>
+      <a class="nav-link collapsed" href="logout.php">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Keluar</span>
+      </a>
+    </li>
   </ul>
 
 </aside><!-- End Sidebar-->
@@ -73,7 +78,7 @@ include 'assets/layout/header.php';
     <h1>Data Pelanggan</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
         <li class="breadcrumb-item">Users</li>
         <li class="breadcrumb-item active">Pelanggan</li>
       </ol>
@@ -97,7 +102,6 @@ include 'assets/layout/header.php';
                   <th scope="col">Email</th>
                   <th scope="col">Kontak</th>
                   <th scope="col">Alamat</th>
-                  <th scope="col">Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -109,29 +113,7 @@ include 'assets/layout/header.php';
                     <td><?= $data_pelanggan['email']; ?></td>
                     <td><?= $data_pelanggan['no_telp']; ?></td>
                     <td><?= $data_pelanggan['alamat']; ?></td>
-
-                    <th>
-                      <a href="hapus-pelanggan.php?id_user=<?= $data_pelanggan['id_user'] ?>" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modalcostumer">Hapus</a>
-                    </th>
                   </tr>
-                  <!-- hapus Costumers -->
-                  <div class="modal fade" id="delete_modalcostumer" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Hapus Admin</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          Apakah Anda Yakin Akan Menghapus Pelanggan Dengan Username <?= $data_pelanggan['username']; ?>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                          <a href="hapus-pelanggan.php?id_user=<?= $data_pelanggan['id_user'] ?>" class="btn btn-danger" type="button">Hapus </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div><!-- End  Modal-->
                 <?php endforeach; ?>
               </tbody>
             </table>

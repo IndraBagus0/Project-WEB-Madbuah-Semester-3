@@ -1,5 +1,19 @@
 <?php
 include 'assets/layout/header.php';
+// check apakah tombol ubah ditekan
+if (isset($_POST['ubahtransaksi'])) {
+  if (Proses($_POST) > 1) {
+    echo "<script>
+                          alert('Data transaksi Berhasil Diubah');
+                          document.location.href = 'pesanan.php';
+                        </script>";
+  } else {
+    echo "<script>
+                    alert('Data transaksi Gagal Diubah');
+                    document.location.href = 'pesanan.php';
+                </script>";
+  }
+}
 
 ?>
 
@@ -9,7 +23,7 @@ include 'assets/layout/header.php';
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="index.php">
+      <a class="nav-link collapsed" href="dashboard.php">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -53,6 +67,12 @@ include 'assets/layout/header.php';
         <span>Laporan</span>
       </a>
     </li><!-- End Charts Nav -->
+    <li>
+      <a class="nav-link collapsed" href="logout.php">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Keluar</span>
+      </a>
+    </li>
 
 </aside><!-- End Sidebar-->
 
@@ -92,14 +112,14 @@ include 'assets/layout/header.php';
                     <td><?= $pesanan['id_transaksi']; ?></td>
                     <td><?= $pesanan['fullname']; ?></td>
                     <td><?= $pesanan['tanggal_beli']; ?></td>
-                    <td><?= $pesanan['qty_transaksi']; ?> Produk</td>
+                    <td><?= $pesanan['qty']; ?> Produk</td>
                     <td><?= $pesanan['total']; ?></td>
-                    <td><?= $pesanan['status_transaksi']; ?></td>
+                    <td><?= $pesanan['status']; ?></td>
                     <!-- <td><span class="badge rounded-pill bg-success ">Selesai</span></td> -->
                     <td>
                       <a href="invoice.php?id_transaksi=<?= $pesanan['id_transaksi']; ?>" class="btn btn-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a>
                       <a href="hapus-transaksi.php?id_transaksi<?= $pesanan['id_transaksi']; ?>" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletepesanan<?= $pesanan['id_transaksi']; ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                      <a href="#" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#orderModalId-62"><i class="fa fa-truck" aria-hidden="true"></i></a>
+                      <a href="#" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#orderModalId-62<?= $pesanan['id_transaksi']; ?>"><i class="fa fa-truck" aria-hidden="true"></i></a>
                     </td>
                   </tr>
 
@@ -122,32 +142,30 @@ include 'assets/layout/header.php';
                     </div>
                   </div><!-- End  Modal-->
                   <!-- modal ubah -->
-                  <div class="modal fade" id="orderModalId-62" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                  <div class="modal fade" id="orderModalId-62<?= $pesanan['id_transaksi']; ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Hapus Pesanan</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form action="" method="POST">
+                        <form action="" method="POST">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Proses Pesanan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <input type="hidden" name="status" value="<?= $transaksi['id_transaksi']; ?>">
                             <div class="mb-3">
-                              <label for="pesanan">Status</label>
-                              <br>
-                              <select name="order_status" id="pesanan" class="form-control">
-                                <option selected="" value="0">Status</option>
-                                <option value="1">Proses</option>
-                                <option value="3">Selesai</option>
-                                <option value="4">Di Batalkan</option>
+                              <label for="pesanan">Status <?= $pesanan['id_transaksi']; ?></label>
+                              <select name="status" id="pesanan" class="form-control">
+                                <option value="Proses">Proses</option>
+                                <option value="Pelesai">Selesai</option>
+                                <option value="Dibatalkan">Di Batalkan</option>
                               </select>
                             </div>
-                          </form>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ubah</button>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                              <button type="submit" name="ubahtransaksi" class="btn btn-primary" style="float: right;">Ubah</button>
+                            </div>
                           </div>
-
-                        </div>
+                        </form>
                       </div>
                     </div>
               </tbody>
